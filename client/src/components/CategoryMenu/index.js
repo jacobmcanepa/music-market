@@ -1,55 +1,23 @@
 import React from 'react';
-import { useQuery } from '@apollo/client';
-import { QUERY_CATEGORIES } from '../../utils/queries';
-import { useStoreContext } from "../../utils/GlobalState";
-import { idbPromise } from '../../utils/helpers';
 
 function CategoryMenu() {
-  const [state, dispatch] = useStoreContext();
-  const { categories } = state;
-  const { data: categoryData } = useQuery(QUERY_CATEGORIES);
-  
-  useEffect(() => {
-    if (categoryData) {
-      dispatch({
-        type: UPDATE_CATEGORIES,
-        categories: categoryData.categories
-      });
-      categoryData.categories.forEach(category => {
-        idbPromise('categories', 'put', category);
-      });
-    } else if (!loading) {
-      idbPromise('categories', 'get').then(categories => {
-        dispatch({
-          type: UPDATE_CATEGORIES,
-          categories: categories
-        });
-      });
-    }
-  }, [categoryData, loading, dispatch]);
+	return (
+		<section>
+			<h2>Categories:</h2>
 
-  const handleClick = id => {
-    dispatch({
-      type: UPDATE_CURRENT_CATEGORY,
-      currentCategory: id
-    });
-  };
-
-  return (
-  <div>
-    <h2>Choose a Category:</h2>
-    {categories.map(item => (
-      <button
-        key={item._id}
-        onClick={() => {
-          handleClick(item._id);
-        }}
-      >
-        {item.name}
-      </button>
-    ))}
-  </div>
-);
+			<div>
+				<button className="px-5 py-2 bg-emerald-200 hover:bg-teal-300 rounded-md">
+					category name
+				</button>
+				<button className="px-5 py-2 bg-emerald-200 hover:bg-teal-300 rounded-md">
+					category name
+				</button>
+				<button className="px-5 py-2 bg-emerald-200 hover:bg-teal-300 rounded-md">
+					category name
+				</button>
+			</div>
+		</section>
+	);
 }
 
 export default CategoryMenu;

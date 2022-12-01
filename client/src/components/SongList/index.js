@@ -4,9 +4,13 @@ import Song from '../Song';
 function SongList() {
   return (
     <section>
-      <Song />
-      <Song />
-      <Song />
+      <h2>Songs:</h2>
+      <div className='flex flex-row'>
+        <Song />
+        <Song />
+        <Song />
+        <Song />
+      </div>
     </section>
   );
 }

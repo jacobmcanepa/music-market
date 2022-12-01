@@ -1,3 +1,3 @@
 const Category = require('./Category');
 
-module.exports = { Category };
+module.exports = { User, Product, Category, Order };

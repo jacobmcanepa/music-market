@@ -2,6 +2,8 @@ import React from 'react';
 
 import { Link } from "react-router-dom";
 
+/* TODO: change to 'if logged in' using Auth util */
+
 function Nav() {
 
   function showNavigation() {

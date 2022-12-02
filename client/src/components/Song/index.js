@@ -1,13 +1,18 @@
-import React from "react";
+import React from 'react';
+import { Link } from "react-router-dom";
 
+/* TODO: !!! */
 function Song() {
   const addToCart = () => {
     console.log('add to cart');
   }
 
   return (
-    <div className='basis-1/4'>
+    <div className='basis-1/4 p-1'>
       <p>song title</p>
+      <div>
+        $0
+      </div>
       <button onClick={addToCart} className='px-5 py-2 bg-emerald-200 hover:bg-teal-300 rounded-md'>Add to cart</button>
     </div>
   );

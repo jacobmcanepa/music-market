@@ -1,6 +1,8 @@
 import React from 'react';
 import CartItem from '../CartItem';
 
+/* TODO: !!! */
+
 function Cart() {
 
   function submitCheckout() {

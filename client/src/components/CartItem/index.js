@@ -1,5 +1,6 @@
 import React from 'react';
 
+/* TODO: !!! */
 const CartItem = () => {
 
   const removeFromCart = () => {
@@ -7,8 +8,12 @@ const CartItem = () => {
 
   };
 
+  const onChange = (e) => {
+    console.log('on change');
+  };
+
   return (
-    <div>
+    <div className='flex flex-row'>
       <div>
         <img
           src=''
@@ -19,14 +24,18 @@ const CartItem = () => {
         <div>item name, $item price</div>
         <div>
           <span>Qty:</span>
+          {/* FIXME:  change VALUE to '{item.purchaseQuantity}' */}
           <input
-            type="number"
-            placeholder="1"
-
+            type='number'
+            placeholder='1'
+            value='1'
+            onChange={onChange}
           />
+
+          {/* FIXME:  change 'removeFromCart()' to 'removeFromCart(item)' */}
           <span
-            role="img"
-            aria-label="trash"
+            role='img'
+            aria-label='trash'
             onClick={() => removeFromCart()}
           >
             🗑️

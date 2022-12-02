@@ -37,14 +37,17 @@ const typeDefs = gql`
     categories: [Category]
     songs(category: ID): [Song]
     song(_id: ID!): Song
-    user: User
+    me: [User]
+    users: [User]
     order(_id: ID!): Order
   }
 
   type Mutation {
     addCategory(name: String!): Category
+    addSong(name: String!, price: Float!, category: ID!): Song
+    deleteSong(_id: ID!): Song
     addUser(displayName: String!, email: String!, password: String!, artist: Boolean!): Auth
-    addOrder(songs: [ID!]): Order
+    addOrder(songs: [ID]!): Order
     updateUser(displayName: String, email: String, password: String, artist: Boolean): User
     login(email: String!, password: String!): Auth
   }

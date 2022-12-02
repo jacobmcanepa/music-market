@@ -61,7 +61,7 @@ function Signup(props) {
           />
         </div>
         <div>
-          <button type="submit">Submit</button>
+          <button type='submit' className='px-5 py-2 bg-emerald-200 hover:bg-teal-300 rounded-md'>Sign Up</button>
         </div>
       </form>
     </div>

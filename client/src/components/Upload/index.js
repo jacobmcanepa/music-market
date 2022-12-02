@@ -22,8 +22,17 @@ function Upload() {
 		uploadImage(previewSource);
 	};
 
-	const uploadImage = (base64EncodedImage) => {
+	const uploadImage = async (base64EncodedImage) => {
 		console.log(base64EncodedImage);
+		try {
+			await fetch('api/upload', {
+				method: 'POST',
+				body: JSON.stringify({ data: base64EncodedImage }),
+				headers: { 'Content-type': 'application/json' },
+			});
+		} catch (error) {
+			console.log(error);
+		}
 	};
 	return (
 		<div>

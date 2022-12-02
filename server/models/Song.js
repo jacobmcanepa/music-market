@@ -13,11 +13,6 @@ const songSchema = new Schema({
     required: true,
     min: 0.01
   },
-  quantity: {
-    type: Number,
-    min: 1,
-    default: 1
-  },
   category: {
     type: Schema.Types.ObjectId,
     ref: 'Category',

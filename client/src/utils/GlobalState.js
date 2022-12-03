@@ -12,12 +12,13 @@ const StoreProvider = ({ value = [], ...props}) => {
         categories: [],
         currentCategory: ''
     });
-
-    const useStoreContext = () => {
-        return useContext(StoreContext);
-    };
     return <Provider value={[state, dispatch]} { ...props} />;
 
 };
+    const useStoreContext = () => {
+        return useContext(StoreContext);
+    };
+  
+
 
 export { StoreProvider, useStoreContext};

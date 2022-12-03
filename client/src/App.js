@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { StoreProvider } from "./utils/GlobalState";
 
 import Home from './pages/Home';
 import Nav from './components/Nav';
@@ -10,6 +11,7 @@ function App() {
   return (
     <Router>
       <div>
+      <StoreProvider>
         <Nav />
 
         <Routes>
@@ -26,11 +28,12 @@ function App() {
             element={<Signup />} 
           />
         </Routes>
+        </StoreProvider>
       </div>
 
 
     </Router>
-
+    
   );
 }
 

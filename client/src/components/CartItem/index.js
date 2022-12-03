@@ -1,49 +1,69 @@
-import React from 'react';
+import { useStoreContext } from '../../utils/GlobalState';
+import { REMOVE_FROM_CART, UPDATE_CART_QUANTITY } from '../../utils/actions';
+import { idbPromise } from "../../utils/helpers";
 
-/* TODO: !!! */
-const CartItem = () => {
+const CartItem = ({ item }) => {
 
-  const removeFromCart = () => {
-    console.log('remove from cart');
+    const [, dispatch] = useStoreContext();
 
-  };
+    const onChange = (e) => {
+        const value = e.target.value;
+      
+        if (value === '0') {
+          dispatch({
+            type: REMOVE_FROM_CART,
+            _id: item._id
+          });
+        
+          idbPromise('cart', 'delete', { ...item });
+        } else {
+          dispatch({
+            type: UPDATE_CART_QUANTITY,
+            _id: item._id,
+            purchaseQuantity: parseInt(value)
+          });
+        
+          idbPromise('cart', 'put', { ...item, purchaseQuantity: parseInt(value) });
+        }
+      };
 
-  const onChange = (e) => {
-    console.log('on change');
-  };
-
-  return (
-    <div className='flex flex-row'>
-      <div>
-        <img
-          src=''
-          alt=''
-        />
-      </div>
-      <div>
-        <div>item name, $item price</div>
+    const removeFromCart = item => {
+      dispatch({
+        type: REMOVE_FROM_CART,
+        _id: item._id
+      });
+      idbPromise('cart', 'delete', { ...item });
+    };
+    
+    return (
+        <div className="flex-row">
+        {/* <div>                             --> Image placeholder code 
+            <img
+            src={`/images/${item.image}`}
+            alt=""
+            />
+        </div> */}
         <div>
-          <span>Qty:</span>
-          {/* FIXME:  change VALUE to '{item.purchaseQuantity}' */}
-          <input
-            type='number'
-            placeholder='1'
-            value='1'
-            onChange={onChange}
-          />
-
-          {/* FIXME:  change 'removeFromCart()' to 'removeFromCart(item)' */}
-          <span
-            role='img'
-            aria-label='trash'
-            onClick={() => removeFromCart()}
-          >
-            🗑️
-          </span>
+            <div>{item.name}, ${item.price}</div>
+            <div>
+            <span>Qty:</span>
+            <input
+                type="number"
+                placeholder="1"
+                value={item.purchaseQuantity}
+                onChange={onChange}
+                />
+            <span
+                role="img"
+                aria-label="trash"
+                onClick={() => removeFromCart(item)}
+            >
+                🗑️
+            </span>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+        </div>
+    );
 }
 
 export default CartItem;

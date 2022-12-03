@@ -7,36 +7,45 @@ import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from "../../utils/actions";
 
 /* TODO: !!! */
 
-function Cart() {
+const Cart = () => {
+  const [state, dispatch] = useStoreContext();
 
-  function submitCheckout() {
-    console.log('submit checkout');
+  function toggleCart() {
+    dispatch({ type: TOGGLE_CART });
   }
 
-  return (
-    <section>
-      <div>
-        [close]
+  if (!state.cartOpen) {
+    return (
+      <div className="cart-closed" onClick={toggleCart}>
+        <span
+          role="img"
+          aria-label="trash">🛒</span>
       </div>
+    );
+  }
+  
+  return (
+    <div className="cart">
+      <div className="close" onClick={toggleCart} >[close]</div>
       <h2>Shopping Cart</h2>
+      <div>
+          <CartItem item={{name:'Creeping',  price:5, purchaseQuantity:3}} />
+          <CartItem item={{name:'Swimming Pools',  price:6, purchaseQuantity:4}} />
 
-        <div>
-
-            <CartItem />
-            <CartItem />
-            <CartItem />
-            <CartItem />
-
-          <div>
-            <strong>Total: $___</strong>
-
-            <button onClick={submitCheckout}>Checkout</button>
+          <div className="flex-row space-between">
+            <strong>Total: $0</strong>
+            {
+              Auth.loggedIn() ?
+                <button>
+                  Checkout
+                </button>
+                :
+                <span>(log in to check out)</span>
+            }
           </div>
-
         </div>
-
-    </section>
+    </div>
   );
-}
+};
 
 export default Cart;

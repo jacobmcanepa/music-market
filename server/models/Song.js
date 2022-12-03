@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
+// TODO: Add artistName section that references User model perhaps...?
+
 const songSchema = new Schema({
   name: {
     type: String,

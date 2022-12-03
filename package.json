@@ -20,9 +20,12 @@
   },
   "homepage": "https://github.com/jacobmcanepa/proj-3#readme",
   "devDependencies": {
+    "@types/jwt-decode": "^3.1.0",
     "concurrently": "^7.6.0"
   },
   "dependencies": {
-    "dotenv": "^16.0.3"
+    "@apollo/client": "^3.7.1",
+    "dotenv": "^16.0.3",
+    "graphql": "^16.6.0"
   }
 }

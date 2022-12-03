@@ -4,7 +4,7 @@ const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-    categories: async () => {
+      categories: async () => {
       return await Category.find();
     },
     songs: async (parent, { category }) => {
@@ -21,6 +21,16 @@ const resolvers = {
     },
     users: async () => {
       return await User.find();
+    },
+    order: async(parent, { _id }, context) => {
+      if(context.user) {
+        const user = await User.findById(context.user._id).populate({
+          path: 'orders.songs',
+          populate: 'category'
+        });
+        return user.orders.id(_id);
+      }
+      throw new AuthenticationError('Not logged in');
     },
     me: async (parent, args, context) => {
       if (context.user) {
@@ -67,6 +77,14 @@ const resolvers = {
 
       const token = signToken(user);
       return { token, user };
+    },
+    addOrder: async(parent, { songs }, context) => {
+      console.log(context);
+      if(context.user) {
+        const order = new Order({ songs });
+        await User.findByIdAndUpdate(context.user._id, { $push: { orders: order }});
+        return order;
+      }
     },
     updateUser: async (parent, args, context) => {
       if (context.user) {

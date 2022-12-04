@@ -4,13 +4,12 @@ import { useStoreContext } from '../../utils/GlobalState';
 import { ADD_TO_CART, UPDATE_CART_QUANTITY } from '../../utils/actions';
 import { idbPromise } from "../../utils/helpers";
 
-
 /* TODO: !!! */
 function Song(item) {
   const [state, dispatch] = useStoreContext();
   
   const {
-    // name,
+     name,
     _id,
     price,
     quantity
@@ -49,6 +48,7 @@ function Song(item) {
         />
         <p>{name}</p>
       </Link> */}
+      <p>{name}</p>
       <div>
         <div>{quantity} {pluralize("item", quantity)} in stock</div>
         <span>${price}</span>

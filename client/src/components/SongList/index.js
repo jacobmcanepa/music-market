@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import Song from '../Song';
-import { useQuery } from '@apollo/client';
-import { QUERY_SONGS } from '../../utils/queries';
 import { useStoreContext } from '../../utils/GlobalState';
 import { UPDATE_SONGS } from '../../utils/actions';
-import { idbPromise } from "../../utils/helpers";
+import { useQuery } from '@apollo/client';
+import { QUERY_SONGS} from '../../utils/queries';
+import { idbPromise } from '../../utils/helpers';
 import spinner from '../../assets/spinner.gif';
 
 /* TODO: !!! */

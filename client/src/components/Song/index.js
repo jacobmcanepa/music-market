@@ -52,7 +52,7 @@ function Song(item) {
         <div>{quantity} {pluralize("item", quantity)} in stock</div>
         <span>${price}</span>
       </div>
-      <button onClick={addToCart} className='px-5 py-2 bg-emerald-200 hover:bg-teal-300 rounded-md'>Add to cart</button>
+      <button onClick={addToCart}>Add to cart</button>
     </div>
   );
 }

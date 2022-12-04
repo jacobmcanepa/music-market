@@ -1,26 +1,59 @@
-import React from 'react';
-import { Link } from "react-router-dom";
+import React from "react";
+import { pluralize } from "../../utils/helpers"
 import { useStoreContext } from '../../utils/GlobalState';
 import { ADD_TO_CART, UPDATE_CART_QUANTITY } from '../../utils/actions';
+import { idbPromise } from "../../utils/helpers";
+
 
 /* TODO: !!! */
-function Song() {
+function Song(item) {
   const [state, dispatch] = useStoreContext();
   
+  const {
+    // name,
+    _id,
+    price,
+    quantity
+  } = item;
+
+ 
+  const { cart } = state;
+  
   const addToCart = () => {
-    dispatch({
-      type: ADD_TO_CART,
-      product: { ...item, purchaseQuantity: 1 }
-    });
-  };
+    const itemInCart = cart.find((cartItem) => cartItem._id === _id)
+    if (itemInCart) {
+      dispatch({
+        type: UPDATE_CART_QUANTITY,
+        _id: _id,
+        purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1
+      });
+      idbPromise('cart', 'put', {
+        ...itemInCart,
+        purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1
+      });
+    } else {
+      dispatch({
+        type: ADD_TO_CART,
+        song: { ...item, purchaseQuantity: 1 }
+      });
+      idbPromise('cart', 'put', { ...item, purchaseQuantity: 1 });
+    }
+  }
 
   return (
-    <div className='basis-1/4 p-1'>
-      <p>song title</p>
+    <div className="card px-1 py-1">
+      {/* <Link to={`/song/${_id}`}>      
+        <img 
+          alt={name}
+          src={`/images/${image}`}
+        />
+        <p>{name}</p>
+      </Link> */}
       <div>
-        $0
+        <div>{quantity} {pluralize("item", quantity)} in stock</div>
+        <span>${price}</span>
       </div>
-      <button onClick={addToCart} className='px-5 py-2 bg-emerald-200 hover:bg-teal-300 rounded-md'>Add to cart</button>
+      <button onClick={addToCart}>Add to cart</button>
     </div>
   );
 }

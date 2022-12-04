@@ -24,11 +24,8 @@ function SongList() {
       data.songs.forEach((song) => {
         idbPromise('songs', 'put', song);
       });
-      // add else if to check if `loading` is undefined in `useQuery()` Hook
     } else if (!loading) {
-      // since we're offline, get all of the data from the `songs` store
       idbPromise('songs', 'get').then((songs) => {
-        // use retrieved data to set global state for offline browsing
         dispatch({
           type: UPDATE_SONGS,
           songs: songs
@@ -42,7 +39,8 @@ function SongList() {
       return state.songs;
     }
   
-    return state.songs.filter(song => song.category._id === currentCategory);
+    return state.songs.filter(
+      (song) => song.category._id === currentCategory);
   }
 
   return (
@@ -56,7 +54,6 @@ function SongList() {
               _id={song._id}
               name={song.name}
               price={song.price}
-              quantity={song.quantity}
             />
           ))}
         </div>

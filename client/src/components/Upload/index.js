@@ -1,52 +1,45 @@
 import React, { useState } from 'react';
+import { useMutation } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 
-function Upload() {
-	const [fileInputState, setFileInputState] = useState('');
-	const [previewSource, setPreviewSource] = useState('');
-	const [selectedFile, setSelectedFile] = useState('');
-	const handleFileInputChange = (e) => {
-		const file = e.target.files[0];
-		previewFile(file);
-	};
-	const previewFile = (file) => {
-		const reader = new FileReader();
-		reader.readAsDataURL(file);
-		reader.onloadend = () => {
-			setPreviewSource(reader.result);
-		};
-	};
-	const handleSubmitFile = (e) => {
-		console.log('submitting');
-		e.preventDefault();
-		if (!previewSource) return;
-		uploadImage(previewSource);
+const UPLOAD_AVATAR = gql`
+	mutation uploadAvatar($avatar: Upload!) {
+		uploadAvatar(avatar: $avatar) {
+			id
+		}
+	}
+`;
+
+const UploadAvatar = ({ url }) => {
+	const [uploadAvatarMutation] = useMutation(UPLOAD_AVATAR);
+	const [avatar, setAvatar] = useState(null);
+
+	// Store in the state the file
+	const handleChange = (e) => {
+		setAvatar(e.target.files[0]);
 	};
 
-	const uploadImage = (base64EncodedImage) => {
-		console.log(base64EncodedImage);
+	// Trigger the mutation when we click the submit button
+	const handleClick = () => {
+		uploadAvatarMutation({
+			variables: {
+				avatar,
+			},
+		});
 	};
+
 	return (
 		<div>
-			<h1>Upload</h1>
-			<form onSubmit={handleSubmitFile}>
-				<input
-					type="file"
-					name="song"
-					onChange={handleFileInputChange}
-					value={fileInputState}
-				/>
-				<button
-					type="submit"
-					className="px-5 py-2 bg-emerald-200 hover:bg-teal-300 rounded-md"
-				>
-					Submit
-				</button>
-			</form>
-			{previewSource && (
-				<img src={previewSource} alt="chosen" style={{ hieght: '300px' }}></img>
-			)}
+			<input id="logo" type="file" onChange={handleChange} />
+			<button
+				className="px-5 py-2 bg-emerald-200 hover:bg-teal-300 rounded-md"
+				type="button"
+				onClick={handleClick}
+			>
+				Submit
+			</button>
 		</div>
 	);
-}
+};
 
-export default Upload;
+export default UploadAvatar;

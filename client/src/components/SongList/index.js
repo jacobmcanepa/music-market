@@ -33,31 +33,6 @@ function SongList() {
     }
   }, [data, loading, dispatch]);
 
-  const [state, dispatch] = useStoreContext();
-
-  const { currentCategory } = state;
-
-  const { loading, data } = useQuery(QUERY_SONGS);
-
-  useEffect(() => {
-    if (data) {
-      dispatch({
-        type: UPDATE_SONGS,
-        songs: data.songs,
-      });
-      data.songs.forEach((song) => {
-        idbPromise('songs', 'put', song);
-      });
-    } else if (!loading) {
-      idbPromise('songs', 'get').then((songs) => {
-        dispatch({
-          type: UPDATE_SONGS,
-          songs: songs,
-        });
-      });
-    }
-  }, [data, loading, dispatch]);
-
   function filterSongs() {
     if (currentCategory) {
       return state.songs;

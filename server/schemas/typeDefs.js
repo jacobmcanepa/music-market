@@ -39,6 +39,7 @@ const typeDefs = gql`
     song(_id: ID!): Song
     me: [User]
     users: [User]
+    user(_id: ID!): User
     order(_id: ID!): Order
   }
 

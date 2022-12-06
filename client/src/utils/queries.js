@@ -5,10 +5,7 @@ export const QUERY_SONGS = gql`
     songs(category: $category) {
       _id
       name
-      description
       price
-      quantity
-      image
       category {
         _id
       }
@@ -21,9 +18,7 @@ export const QUERY_ALL_SONGS = gql`
     songs {
       _id
       name
-      description
       price
-      quantity
       category {
         name
       }

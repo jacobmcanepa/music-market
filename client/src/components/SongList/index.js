@@ -59,7 +59,7 @@ function SongList() {
   }, [data, loading, dispatch]);
 
   function filterSongs() {
-    if (!currentCategory) {
+    if (currentCategory) {
       return state.songs;
     }
 

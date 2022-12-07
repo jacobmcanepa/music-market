@@ -41,11 +41,22 @@ function CategoryMenu() {
     });
   };
 
+<<<<<<< HEAD
   return (
     <div>
       <h2>Choose a Category:</h2>
       {categories.map((item) => (
         <button
+=======
+	return (
+		<section className='container my-2'>
+			<h2 className='is-size-4'>Categories:</h2>
+
+			<div className='m-2'>
+      {categories.map((item) => (
+        <button
+          className='px-4 py-1 mx-1 bg-emerald-200 hover:bg-teal-300 rounded-md'
+>>>>>>> develop
           key={item._id}
           onClick={() => {
             handleClick(item._id);
@@ -54,8 +65,14 @@ function CategoryMenu() {
           {item.name}
         </button>
       ))}
+<<<<<<< HEAD
     </div>
   );
+=======
+			</div>
+		</section>
+	);
+>>>>>>> develop
 }
 
 export default CategoryMenu;

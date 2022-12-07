@@ -7,17 +7,36 @@ const resolvers = {
       categories: async () => {
       return await Category.find();
     },
-    songs: async (parent, { category }) => {
+    songs: async (parent, { category, name }) => {
       const params = {};
 
       if (category) {
         params.category = category;
       }
 
+      if (name) {
+        params.name = {
+          $regex: name
+        };
+      }
+
       return await Song.find(params).populate('category');
     },
     song: async (parent, { _id }) => {
       return await Song.findById(_id).populate('category');
+    },
+    user: async (parent, args, context) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id).populate({
+          path: 'orders.songs',
+          populate: 'category'
+        });
+
+        user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
+
+        return user;
+      }
+      throw new AuthenticationError('Not logged in');
     },
     users: async () => {
       return await User.find();
@@ -32,6 +51,7 @@ const resolvers = {
       }
       throw new AuthenticationError('Not logged in');
     },
+
     me: async (parent, args, context) => {
       if (context.user) {
         const userData = await User.find({ _id: context.user._id })

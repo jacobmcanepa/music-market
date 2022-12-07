@@ -5,15 +5,15 @@ import { useStoreContext } from "../../utils/GlobalState";
 import { ADD_TO_CART, UPDATE_CART_QUANTITY } from "../../utils/actions";
 import { idbPromise } from "../../utils/helpers";
 
+/* FIXME: STYLING */
 function Song(item) {
   const [state, dispatch] = useStoreContext();
 
   const {
-    image,
     name,
     _id,
     price,
-    quantity
+    category
   } = item;
 
   const { cart } = state;
@@ -41,18 +41,14 @@ function Song(item) {
 
   return (
     <div className='basis-1/4 p-1'>
-      <Link to={`/products/${_id}`}>
-        <img
-          alt={name}
-          src={`/images/${image}`}
-        />
-        <p>{name}</p>
-      </Link>
+
+      <p>{name}</p>
+
       <div>
-        <div>{quantity} {pluralize("item", quantity)} in stock</div>
+        <div>{category}</div>
         <span>${price}</span>
       </div>
-      <button onClick={addToCart} className='px-5 py-2 bg-emerald-200 hover:bg-teal-300 rounded-md'>Add to cart</button>
+      <button onClick={addToCart} className='px-4 py-1 mx-1 bg-emerald-200 hover:bg-teal-300 rounded-md'>Add to cart</button>
     </div>
   );
 }

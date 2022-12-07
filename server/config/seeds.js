@@ -5,11 +5,14 @@ db.once('open', async () => {
   await Category.deleteMany();
 
   const categories = await Category.insertMany([
+    { name: 'EDM' },
+    { name: 'R&B' },
+    { name: 'Rock' },
     { name: 'Pop' },
-    { name: 'Rock ' },
-    { name: 'Hip-hop' },
+    { name: 'Hip Hop' },
+    { name: 'Classical' },
+    { name: 'Country' },
     { name: 'Jazz' },
-    { name: 'Classical' }
   ]);
 
   console.log('categories seeded');
@@ -18,30 +21,15 @@ db.once('open', async () => {
 
   const songs = await Song.insertMany([
     {
-      name: 'Say So',
+      name: 'say so',
       category: categories[0]._id,
-      price: 1.99,
+      price: 1.99
     },
     {
-      name: 'Paradise City',
+      name: 'say so 2',
       category: categories[1]._id,
-      price: 1.99,
+      price: 2.99
     },
-    {
-      name: 'Family Ties',
-      category: categories[2]._id,
-      price: 7.99,
-    },
-    {
-      name: 'The Magnificent 7',
-      category: categories[3]._id,
-      price: 3.99,
-    },
-    {
-      name: 'Moonlight Sonata',
-      category: categories[4]._id,
-      price: 14.99,
-    }
   ]);
 
   console.log('songs seeded');
@@ -52,10 +40,10 @@ db.once('open', async () => {
     displayName: 'Pamela',
     email: 'pamela@testmail.com',
     password: 'password12345',
-    artist: true,
+    artist: false,
     orders: [
       {
-        songs: [songs[0]._id, songs[1]._id, songs[2]._id]
+        songs: [songs[0]._id, songs[1]._id]
       }
     ]
   });
@@ -64,7 +52,7 @@ db.once('open', async () => {
     displayName: 'Elijah',
     email: 'eholt@testmail.com',
     password: 'password12345',
-    artist: false,
+    artist: true
   });
 
   console.log('users seeded');

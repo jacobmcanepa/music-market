@@ -44,23 +44,28 @@ function SongList() {
   }
 
   return (
-    <section className='my-2'>
-      <h2>Songs:</h2>
-      {state.songs.length ? (
-        <div className='flex flex-row'>
-          {filterSongs().map((song) => (
-            <Song
-              key={song._id}
-              _id={song._id}
-              name={song.name}
-              price={song.price}
-            />
-          ))}
-        </div>
-      ) : (
-        <h3>No songs yet!</h3>
-      )}
-      {loading ? <span>loading...</span> : null}
+    <section className='container my-2'>
+      <h2 className='is-size-4'>Songs:</h2>
+
+      <div className='m-2'>
+        {state.songs.length ? (
+          <div className='flex flex-row'>
+            {filterSongs().map((song) => (
+              <Song
+                key={song._id}
+                _id={song._id}
+                name={song.name}
+                price={song.price}
+                category={song.category}
+              />
+            ))}
+          </div>
+        ) : (
+          <h3>No songs yet!</h3>
+        )}
+        {loading ? <span>loading...</span> : null}
+      </div>
+      
     </section>
   );
 }

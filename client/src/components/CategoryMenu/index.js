@@ -42,13 +42,13 @@ function CategoryMenu() {
   };
 
 	return (
-		<section>
-			<h2>Categories:</h2>
+		<section className='container my-2'>
+			<h2 className='is-size-4'>Categories:</h2>
 
-			<div>
+			<div className='m-2'>
       {categories.map((item) => (
         <button
-          className="px-5 py-2 mx-2 bg-emerald-200 hover:bg-teal-300 rounded-md"
+          className='px-4 py-1 mx-1 bg-emerald-200 hover:bg-teal-300 rounded-md'
           key={item._id}
           onClick={() => {
             handleClick(item._id);
@@ -57,6 +57,17 @@ function CategoryMenu() {
           {item.name}
         </button>
       ))}
+
+        <button
+          className='px-4 py-1 mx-1 bg-emerald-200 hover:bg-teal-300 rounded-md'
+        >
+          test category
+        </button>
+        <button
+          className='px-4 py-1 mx-1 bg-emerald-200 hover:bg-teal-300 rounded-md'
+        >
+          test category
+        </button>
 			</div>
 		</section>
 	);

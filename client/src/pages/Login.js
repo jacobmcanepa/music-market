@@ -30,11 +30,11 @@ function Login(props) {
   };
 
   return (
-    <div className="container my-1">
+    <div className="container my-3">
       
       <div className=' flex justify-center'>
         <div className='w-8/12 bg-stone-100 p-6'>
-          <h2 className="text-center text-xl pb-2">Login</h2>
+          <h2 className="text-center title is-2 pb-2">Login</h2>
           <form onSubmit={handleFormSubmit}>
             <div className="field">
               <label htmlFor="email" className='label'>Email:</label>

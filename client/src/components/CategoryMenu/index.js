@@ -57,6 +57,17 @@ function CategoryMenu() {
           {item.name}
         </button>
       ))}
+
+        <button
+          className='px-4 py-1 mx-1 bg-emerald-200 hover:bg-teal-300 rounded-md'
+        >
+          test category
+        </button>
+        <button
+          className='px-4 py-1 mx-1 bg-emerald-200 hover:bg-teal-300 rounded-md'
+        >
+          test category
+        </button>
 			</div>
 		</section>
 	);

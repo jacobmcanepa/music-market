@@ -1,6 +1,7 @@
 const { Category, User, Song, Order } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
+const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 const resolvers = {
   Query: {
@@ -31,6 +32,40 @@ const resolvers = {
         return user.orders.id(_id);
       }
       throw new AuthenticationError('Not logged in');
+    },
+    checkout: async (parent, args, context) => {
+      const url = new URL(context.headers.referer).origin;
+      const order = new Order({ songs: args.songs });
+      const line_items = [];
+
+      const { songs } = await order.populate('songs');
+
+      for (let i = 0; i < songs.length; i++) {
+        const song = await stripe.songs.create({
+          name: songs[i].name,
+        });
+
+        const price = await stripe.prices.create({
+          song: song.id,
+          unit_amount: songs[i].price * 100,
+          currency: 'usd',
+        });
+
+        line_items.push({
+          price: price.id,
+          quantity: 1
+        });
+      }
+
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        line_items,
+        mode: 'payment',
+        success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${url}/`
+      });
+
+      return { session: session.id };
     },
     me: async (parent, args, context) => {
       if (context.user) {

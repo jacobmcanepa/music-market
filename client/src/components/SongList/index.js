@@ -9,66 +9,65 @@ import { idbPromise } from '../../utils/helpers';
 // import spinner from '../../assets/spinner.gif';
 
 function SongList() {
-  const [state, dispatch] = useStoreContext();
-  const { currentCategory } = state;
-  const { loading, data } = useQuery(QUERY_SONGS);
-  console.log(data);
+	const [state, dispatch] = useStoreContext();
+	const { currentCategory } = state;
+	const { loading, data } = useQuery(QUERY_SONGS);
+	console.log(data);
 
-  useEffect(() => {
-    if(data) {
-      dispatch({
-        type: UPDATE_SONGS,
-        songs: data.songs
-      });
-  
-      data.songs.forEach((song) => {
-        idbPromise('songs', 'put', song);
-      });
-    } else if (!loading) {
-      idbPromise('songs', 'get').then((songs) => {
-        dispatch({
-          type: UPDATE_SONGS,
-          songs: songs
-        });
-      });
-    }
-  }, [data, loading, dispatch]);
+	useEffect(() => {
+		if (data) {
+			dispatch({
+				type: UPDATE_SONGS,
+				songs: data.songs,
+			});
 
-  function filterSongs() {
-    if (!currentCategory) {
-      return state.songs;
-    }
+			data.songs.forEach((song) => {
+				idbPromise('songs', 'put', song);
+			});
+		} else if (!loading) {
+			idbPromise('songs', 'get').then((songs) => {
+				dispatch({
+					type: UPDATE_SONGS,
+					songs: songs,
+				});
+			});
+		}
+	}, [data, loading, dispatch]);
 
-    return state.songs.filter(
-      (song) => song.category._id === currentCategory
-    );
-  }
+	function filterSongs() {
+		if (!currentCategory) {
+			return state.songs;
+		}
 
-  return (
-    <section className='container my-2 px-6'>
-      <h2 className='is-size-4'>Songs:</h2>
+		return state.songs.filter((song) => song.category._id === currentCategory);
+	}
 
-      <div className='m-2'>
-        {state.songs.length ? (
-          <div className='flex flex-wrap m-2 justify-center'>
-            {filterSongs().map((song) => (
-              <Song
-                key={song._id}
-                _id={song._id}
-                name={song.name}
-                price={song.price}
-                category={song.category.name}
-              />
-            ))}
-          </div>
-        ) : (
-          <h3>No songs yet!</h3>
-        )}
-        {loading ? <span>loading...</span> : null}
-      </div>
-      
-    </section>
-  );
+	return (
+		<section className="container my-2 px-6">
+			<h2 className="is-size-4 text-white font-semibold drop-shadow-lg">
+				Songs:
+			</h2>
+
+			<div className="m-2">
+				{state.songs.length ? (
+					<div className="flex flex-wrap m-2 justify-center">
+						{filterSongs().map((song) => (
+							<Song
+								key={song._id}
+								_id={song._id}
+								name={song.name}
+								price={song.price}
+								category={song.category.name}
+							/>
+						))}
+					</div>
+				) : (
+					<h3>No songs yet!</h3>
+				)}
+				{loading ? <span>loading...</span> : null}
+			</div>
+		</section>
+	);
 }
 
 export default SongList;

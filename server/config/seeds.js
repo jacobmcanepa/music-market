@@ -13,6 +13,7 @@ db.once('open', async () => {
     { name: 'Classical' },
     { name: 'Country' },
     { name: 'Jazz' },
+    { name: 'Soul'}
   ]);
 
   console.log('categories seeded');
@@ -21,14 +22,64 @@ db.once('open', async () => {
 
   const songs = await Song.insertMany([
     {
-      name: 'say so',
+      name: 'Say So',
       category: categories[0]._id,
-      price: 1.99
+      price: 0.99
     },
     {
-      name: 'say so 2',
+      name: 'Shoot to Thrill',
+      category: categories[2]._id,
+      price: 0.99
+    },
+    {
+      name: "Let's Stay Together",
+      category: categories[8]._id,
+      price: 0.99
+    },
+    {
+      name: 'A Change is Gonna Come',
       category: categories[1]._id,
-      price: 2.99
+      price: 0.99
+    },
+    {
+      name: 'Boca Raton',
+      category: categories[1]._id,
+      price: 0.99
+    },
+    {
+      name: 'Fireworks',
+      category: categories[3]._id,
+      price: 0.99
+    },
+    {
+      name: 'Who Dat Boy',
+      category: categories[4]._id,
+      price: 0.99
+    },
+    {
+      name: 'RNP',
+      category: categories[4]._id,
+      price: 0.99
+    },
+    {
+      name: 'I Feel Free',
+      category: categories[2]._id,
+      price: 0.99
+    },
+    {
+      name: 'Bolero, M. 81',
+      category: categories[5]._id,
+      price: 0.99
+    },
+    {
+      name: 'Why We Drink',
+      category: categories[6]._id,
+      price: 0.99
+    },
+    {
+      name: 'Autumn Leaves',
+      category: categories[7]._id,
+      price: 0.99
     },
   ]);
 
@@ -53,6 +104,13 @@ db.once('open', async () => {
     email: 'eholt@testmail.com',
     password: 'password12345',
     artist: true
+  });
+
+  await User.create({
+    displayName: 'testuser',
+    email: 'test@gmail.com',
+    password: 'password',
+    artist: false
   });
 
   console.log('users seeded');

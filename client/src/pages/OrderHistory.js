@@ -14,36 +14,43 @@ function OrderHistory() {
 
   return (
     <>
-      <div className="container my-1">
+      <div className="container my-2 px-6">
         <Link to="/">← Back to Songs</Link>
 
         {user ? (
           <>
-            <h2 className='title is-2 pb-2'>
-              Order History for {user.displayName}
+            <h2 className='is-size-4 pb-2'>
+              Order History for <strong>{user.displayName}</strong>
             </h2>
-            {user.orders.map((order) => (
-              <div key={order._id} className="my-2">
-                <h3>
-                  {new Date(parseInt(order.purchaseDate)).toLocaleDateString()}
-                </h3>
-                <div className="flex flex-row">
-                  {order.songs.map(({name, price, category }, index) => (
-                    <div key={index} className="basis-1/4 p-1">
+            {user.orders.length ? 
+              (
+                <>
+                  {user.orders.map((order) => (
+                    <div key={order._id} className="my-2">
+                      <h3 className='text-xl'>
+                        {new Date(parseInt(order.purchaseDate)).toLocaleDateString()}
+                      </h3>
+                      <div className="flex flex-row">
+                        {order.songs.map(({name, price, category }, index) => (
+                          <div key={index} className="basis-1/4 p-1">
 
-                      <p>{name}</p>
+                            <p className='font-bold'>{name}</p>
 
-                      <div>
-                        <div>{category}</div>
-                        <span>${price}</span>
+                            <div>
+                              <div className='italic'>{category.name}</div>
+                              <span className='text-teal-700 font-bold'>${price}</span>
+                            </div>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   ))}
-                </div>
-              </div>
-            ))}
+                </>
+              ) : 
+              <div className='m-2 text-xl'>You haven't ordered anything yet!</div> 
+            }
           </>
-        ) : null}
+        ) : <div className='m-2 text-xl'>You must be logged in to view your order history!</div>}
       </div>
     </>
   );

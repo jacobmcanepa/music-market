@@ -5,16 +5,22 @@ import Auth from '../utils/auth';
 import { ADD_USER } from '../utils/mutations';
 
 function Signup(props) {
-  const [formState, setFormState] = useState({ email: '', password: '' });
+  const [formState, setFormState] = useState({ email: '', password: '', displayName: '', artist: false });
   const [addUser] = useMutation(ADD_USER);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+
+    if (document.getElementById("artist").checked) {
+      formState.artist = true;
+    }
+
     const mutationResponse = await addUser({
       variables: {
         email: formState.email,
         password: formState.password,
         displayName: formState.displayName,
+        artist: formState.artist,
       },
     });
     const token = mutationResponse.data.addUser.token;
@@ -80,9 +86,12 @@ function Signup(props) {
             </div>
 
             <div className='text-center'>
-              <label className="checkbox">
-                <input type="checkbox" /> I am an artist.
+              
+              <input type="checkbox" name="artist" id="artist" />
+              <label htmlFor="artist" className="checkbox">
+                I am an artist.
               </label>
+              
               <div className="my-2">
                 <button type='submit' className='px-5 py-2 bg-emerald-200 hover:bg-teal-300 rounded-md'>Sign Up</button>
               </div>

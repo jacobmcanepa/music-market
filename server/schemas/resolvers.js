@@ -52,7 +52,7 @@ const resolvers = {
     },
 
     checkout: async (parent, args, context) => {
-      const url = 'https://localhost:3001';              //new URL(context.headers.referer).origin;
+      const url = new URL(context.headers.referer).origin;
       
       const order = new Order({ songs: args.songs });
         const { songs } = await order.populate('songs');

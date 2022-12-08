@@ -18,9 +18,7 @@ export const ADD_ORDER = gql`
       songs {
         _id
         name
-        description
         price
-        quantity
         category {
           name
         }

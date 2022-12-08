@@ -42,13 +42,13 @@ function CategoryMenu() {
   };
 
 	return (
-		<section className='container my-2'>
+		<section className='container my-2 px-6'>
 			<h2 className='is-size-4'>Categories:</h2>
 
-			<div className='m-2'>
+			<div className='flex flex-wrap m-2 justify-center'>
       {categories.map((item) => (
         <button
-          className='px-4 py-1 mx-1 bg-emerald-200 hover:bg-teal-300 rounded-md'
+          className='px-4 py-1 m-1 bg-emerald-200 hover:bg-teal-300 rounded-md'
           key={item._id}
           onClick={() => {
             handleClick(item._id);
@@ -57,17 +57,6 @@ function CategoryMenu() {
           {item.name}
         </button>
       ))}
-
-        <button
-          className='px-4 py-1 mx-1 bg-emerald-200 hover:bg-teal-300 rounded-md'
-        >
-          test category
-        </button>
-        <button
-          className='px-4 py-1 mx-1 bg-emerald-200 hover:bg-teal-300 rounded-md'
-        >
-          test category
-        </button>
 			</div>
 		</section>
 	);

@@ -44,12 +44,12 @@ function SongList() {
   }
 
   return (
-    <section className='container my-2'>
+    <section className='container my-2 px-6'>
       <h2 className='is-size-4'>Songs:</h2>
 
       <div className='m-2'>
         {state.songs.length ? (
-          <div className='flex flex-row'>
+          <div className='flex flex-wrap m-2 justify-center'>
             {filterSongs().map((song) => (
               <Song
                 key={song._id}

@@ -7,34 +7,7 @@ function Nav() {
 		if (Auth.loggedIn()) {
 			return (
 				<ul className="flex flex-row">
-					<li className="mx-2 is-size-4">
-						<Link to="/orderHistory">Order History</Link>
-					</li>
-					<li className="mx-2 is-size-4">
-						<a href="/" onClick={() => Auth.logout()}>
-							Logout
-						</a>
-					</li>
-				</ul>
-			);
-		} else {
-			return (
-				<ul className="flex flex-row">
-					<li className="mx-2 is-size-4">
-						<Link to="/signup">Signup</Link>
-					</li>
-					<li className="mx-2 is-size-4">
-						<Link to="/login">Login</Link>
-					</li>
-				</ul>
-			);
-		}
-	}
-	function showNavigation() {
-		if (Auth.loggedIn()) {
-			return (
-				<ul className="flex flex-row">
-					<li className="mx-2 is-size-4">
+					<li className="mx-2 is-size-4 drop-shadow-lg">
 						<a href="/" onClick={() => Auth.logout()}>
 							Logout
 						</a>

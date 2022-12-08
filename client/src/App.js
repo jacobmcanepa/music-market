@@ -43,47 +43,11 @@ function App() {
 					<StoreProvider>
 						<Nav />
 
-    
-    <Router>
-      <div>
-      <StoreProvider>
-        <Nav />
-
-        <Routes>
-          <Route 
-            path="/" 
-            element={<Home />} 
-          />
-          <Route 
-            path="/login" 
-            element={<Login />} 
-          />
-          <Route 
-            path="/signup" 
-            element={<Signup />} 
-          />
-          <Route 
-            path="/orderHistory" 
-            element={<OrderHistory />} 
-          />
-          <Route 
-            path="/success" 
-            element={<Success />} 
-          />
-        </Routes>
-        </StoreProvider>
-      </div>
-
-
-    </Router>
-
-    </ApolloProvider>
-    
-  );
 						<Routes>
 							<Route path="/" element={<Home />} />
 							<Route path="/login" element={<Login />} />
 							<Route path="/signup" element={<Signup />} />
+							<Route path="/orderHistory" element={<OrderHistory />} />
 							<Route path="/success" element={<Success />} />
 						</Routes>
 					</StoreProvider>

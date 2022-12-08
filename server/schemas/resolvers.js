@@ -1,17 +1,24 @@
 const { Category, User, Song, Order } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
+const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 const resolvers = {
   Query: {
       categories: async () => {
       return await Category.find();
     },
-    songs: async (parent, { category }) => {
+    songs: async (parent, { category, name }) => {
       const params = {};
 
       if (category) {
         params.category = category;
+      }
+
+      if (name) {
+        params.name = {
+          $regex: name
+        };
       }
 
       return await Song.find(params).populate('category');
@@ -19,8 +26,19 @@ const resolvers = {
     song: async (parent, { _id }) => {
       return await Song.findById(_id).populate('category');
     },
-    users: async () => {
-      return await User.find();
+    user: async (parent, args, context) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id).populate({
+          path: 'orders.songs',
+          populate: 'category'
+        });
+
+        user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
+
+        return user;
+      }
+
+      throw new AuthenticationError('Not logged in');
     },
     order: async(parent, { _id }, context) => {
       if(context.user) {
@@ -32,16 +50,44 @@ const resolvers = {
       }
       throw new AuthenticationError('Not logged in');
     },
-    me: async (parent, args, context) => {
-      if (context.user) {
-        const userData = await User.find({ _id: context.user._id })
-          .select('-__v, -password');
 
-        return userData;
+    checkout: async (parent, args, context) => {
+      const url = 'https://localhost:3001';              //new URL(context.headers.referer).origin;
+      
+      const order = new Order({ songs: args.songs });
+        const { songs } = await order.populate('songs');
+      const line_items = [];
+
+      for (let i = 0; i < songs.length; i++) {
+        // Create a new product object for the song
+        const product = await stripe.products.create({
+          name: songs[i].name,
+        });
+      
+        // Create a new price object for the product
+        const price = await stripe.prices.create({
+          product: product.id,
+          unit_amount: songs[i].price * 100,
+          currency: 'usd',
+        });
+      
+        // Add the product to the list of line items
+        line_items.push({
+          price: price.id,
+          quantity: 1
+        });
       }
 
-      throw new AuthenticationError('Not logged in');
-    },
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        line_items,
+        mode: 'payment',
+        success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${url}/`
+      });
+      
+      return { session: session.id };
+    }
   },
   Mutation: {
     addCategory: async (parent, args) => {

@@ -38,18 +38,18 @@ export const QUERY_CATEGORIES = gql`
 export const QUERY_USER = gql`
   {
     user {
-      firstName
-      lastName
+      _id
+      displayName
       orders {
         _id
         purchaseDate
         songs {
           _id
           name
-          description
           price
-          quantity
-          image
+          category {
+            name
+          }
         }
       }
     }

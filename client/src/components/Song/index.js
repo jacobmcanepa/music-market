@@ -48,7 +48,7 @@ function Song(item) {
         <div>{category}</div>
         <span>${price}</span>
       </div>
-      <button onClick={addToCart} className='px-4 py-1 mx-1 bg-emerald-200 hover:bg-teal-300 rounded-md'>Add to cart</button>
+      <button onClick={addToCart} className='px-4 py-1 m-1 bg-emerald-200 hover:bg-teal-300 rounded-md'>Add to cart</button>
     </div>
   );
 }

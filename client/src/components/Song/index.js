@@ -33,10 +33,10 @@ function Song(item) {
 	};
 
 	return (
-		<div className="basis-1/4 p-1">
-			<p className="text-white">{name}</p>
+		<div className="basis-1/4 p-2 song-card">
+			<p className="text-black">{name}</p>
 
-			<div className="text-white">
+			<div className="text-black">
 				<div>{category}</div>
 				<span>${price}</span>
 			</div>

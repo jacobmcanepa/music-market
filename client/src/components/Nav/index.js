@@ -7,6 +7,9 @@ function Nav() {
 		if (Auth.loggedIn()) {
 			return (
 				<ul className="flex flex-row">
+          <li className="mx-2 is-size-4 drop-shadow-lg">
+            <Link to="/orderHistory">Order History</Link>
+					</li>
 					<li className="mx-2 is-size-4 drop-shadow-lg">
 						<a href="/" onClick={() => Auth.logout()}>
 							Logout

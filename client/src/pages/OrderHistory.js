@@ -14,13 +14,12 @@ function OrderHistory() {
 
   return (
     <>
-      <div className="container my-2 px-6">
-        <Link to="/">← Back to Songs</Link>
+      <div className="container my-2 px-6 has-text-white">
 
         {user ? (
           <>
             <h2 className='is-size-4 pb-2'>
-              Order History for <strong>{user.displayName}</strong>
+              Order History for <span className='font-bold'>{user.displayName}</span>
             </h2>
             {user.orders.length ? 
               (
@@ -38,7 +37,7 @@ function OrderHistory() {
 
                             <div>
                               <div className='italic'>{category.name}</div>
-                              <span className='text-teal-700 font-bold'>${price}</span>
+                              <span className='text-teal-100 font-bold'>${price}</span>
                             </div>
                           </div>
                         ))}

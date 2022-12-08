@@ -40,7 +40,7 @@ export const ADD_USER = gql`
       displayName: $displayName
       email: $email
       password: $password
-      artist: $boolean
+      artist: $artist
     ) {
       token
       user {

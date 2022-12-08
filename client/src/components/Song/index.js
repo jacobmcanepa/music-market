@@ -33,7 +33,7 @@ function Song(item) {
 	};
 
 	return (
-		<div className="basis-1/4 p-1 ">
+		<div className="basis-1/4 p-1">
 			<p className="text-white">{name}</p>
 
 			<div className="text-white">

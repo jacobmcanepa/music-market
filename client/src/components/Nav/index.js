@@ -9,6 +9,11 @@ function Nav() {
       return (
         <ul className="flex flex-row">
           <li className="mx-2 is-size-4">
+            <Link to="/orderHistory">
+              Order History
+            </Link>
+          </li>
+          <li className="mx-2 is-size-4">
             <a href='/' onClick={() => Auth.logout()}>
               Logout
             </a>

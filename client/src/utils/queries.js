@@ -8,6 +8,7 @@ export const QUERY_SONGS = gql`
       price
       category {
         _id
+        name
       }
     }
   }

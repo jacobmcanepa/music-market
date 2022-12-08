@@ -71,6 +71,8 @@ const Cart = () => {
     );
   }
 
+  console.log(state.cart)
+
   
   return (
     <div className="cart">

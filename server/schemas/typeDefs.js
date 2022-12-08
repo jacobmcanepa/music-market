@@ -28,8 +28,8 @@ const typeDefs = gql`
     orders: [Order]
   }
 
-  type Checkout{
-    session:ID
+  type Checkout {
+    session: ID
   }
 
   type Auth {
@@ -41,21 +41,19 @@ const typeDefs = gql`
     categories: [Category]
     songs(category: ID, name: String): [Song]
     song(_id: ID!): Song
-    me: [User]
-    users: [User]
-    user(_id: ID!): User
+    user: User
     order(_id: ID!): Order
     checkout(songs: [ID]!): Checkout
   }
 
   type Mutation {
-    addCategory(name: String!): Category
-    addSong(name: String!, price: Float!, category: ID!): Song
-    deleteSong(_id: ID!): Song
     addUser(displayName: String!, email: String!, password: String!, artist: Boolean!): Auth
     addOrder(songs: [ID]!): Order
     updateUser(displayName: String, email: String, password: String, artist: Boolean): User
     login(email: String!, password: String!): Auth
+    addCategory(name: String!): Category
+    addSong(name: String!, price: Float!, category: ID!): Song
+    deleteSong(_id: ID!): Song
   }
 `;
 

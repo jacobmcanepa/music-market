@@ -12,6 +12,7 @@ function SongList() {
   const [state, dispatch] = useStoreContext();
   const { currentCategory } = state;
   const { loading, data } = useQuery(QUERY_SONGS);
+  console.log(data);
 
   useEffect(() => {
     if(data) {
@@ -34,7 +35,7 @@ function SongList() {
   }, [data, loading, dispatch]);
 
   function filterSongs() {
-    if (currentCategory) {
+    if (!currentCategory) {
       return state.songs;
     }
 
@@ -56,7 +57,7 @@ function SongList() {
                 _id={song._id}
                 name={song.name}
                 price={song.price}
-                category={song.category}
+                category={song.category.name}
               />
             ))}
           </div>

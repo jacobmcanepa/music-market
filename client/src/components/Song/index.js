@@ -1,54 +1,53 @@
 import React from 'react';
-import { useStoreContext } from "../../utils/GlobalState";
-import { ADD_TO_CART, UPDATE_CART_QUANTITY } from "../../utils/actions";
-import { idbPromise } from "../../utils/helpers";
+import { useStoreContext } from '../../utils/GlobalState';
+import { ADD_TO_CART, UPDATE_CART_QUANTITY } from '../../utils/actions';
+import { idbPromise } from '../../utils/helpers';
 
 /* FIXME: STYLING */
 function Song(item) {
-  const [state, dispatch] = useStoreContext();
+	const [state, dispatch] = useStoreContext();
 
-  const {
-    name,
-    _id,
-    price,
-    category
-  } = item;
+	const { name, _id, price, category } = item;
 
-  const { cart } = state;
+	const { cart } = state;
 
-  const addToCart = () => {
-    const itemInCart = cart.find((cartItem) => cartItem._id === _id)
-    if (itemInCart) {
-      dispatch({
-        type: UPDATE_CART_QUANTITY,
-        _id: _id,
-        purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1
-      });
-      idbPromise('cart', 'put', {
-        ...itemInCart,
-        purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1
-      });
-    } else {
-      dispatch({
-        type: ADD_TO_CART,
-        song: { ...item, purchaseQuantity: 1 }
-      });
-      idbPromise('cart', 'put', { ...item, purchaseQuantity: 1 });
-    }
-  }
+	const addToCart = () => {
+		const itemInCart = cart.find((cartItem) => cartItem._id === _id);
+		if (itemInCart) {
+			dispatch({
+				type: UPDATE_CART_QUANTITY,
+				_id: _id,
+				purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
+			});
+			idbPromise('cart', 'put', {
+				...itemInCart,
+				purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
+			});
+		} else {
+			dispatch({
+				type: ADD_TO_CART,
+				song: { ...item, purchaseQuantity: 1 },
+			});
+			idbPromise('cart', 'put', { ...item, purchaseQuantity: 1 });
+		}
+	};
 
-  return (
-    <div className='basis-1/4 p-1'>
+	return (
+		<div className="basis-1/4 p-1 ">
+			<p className="text-white">{name}</p>
 
-      <p>{name}</p>
-
-      <div>
-        <div>{category}</div>
-        <span>${price}</span>
-      </div>
-      <button onClick={addToCart} className='px-4 py-1 m-1 bg-emerald-200 hover:bg-teal-300 rounded-md'>Add to cart</button>
-    </div>
-  );
+			<div className="text-white">
+				<div>{category}</div>
+				<span>${price}</span>
+			</div>
+			<button
+				onClick={addToCart}
+				className="px-4 py-1 m-1 transition ease-in-out delay-150 bg-emerald-200 hover:-translate-y-1 hover:scale-110 hover:bg-teal-300 duration-300 rounded-md drop-shadow-xl"
+			>
+				Add to cart
+			</button>
+		</div>
+	);
 }
 
 export default Song;

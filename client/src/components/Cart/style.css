@@ -1,6 +1,6 @@
 .cart {
 	position: fixed;
-	top: 80px;
+	top: 0;
 	right: 0;
 	min-width: 20%;
 	max-width: 30%;
@@ -82,3 +82,4 @@
 		margin: 0 auto;
 	}
 }
+

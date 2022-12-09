@@ -88,9 +88,22 @@ const Cart = () => {
 						<strong>Total: ${calculateTotal()}</strong>
 
 						{Auth.loggedIn() ? (
-							<button onClick={submitCheckout}>Checkout</button>
+						<button
+            id="checkout-button"
+            onClick={submitCheckout}
+            style={{
+              color: "#000080",
+              backgroundColor: "#add8e6",
+              borderRadius: "1rem",
+              height: "25px",
+              margin: "0 80px",
+              width: "90px",
+            }}
+          >
+            Checkout
+          </button>
 						) : (
-							<span>(log in to check out)</span>
+							<span>(Log in to check out)</span>
 						)}
 					</div>
 				</div>

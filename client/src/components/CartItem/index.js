@@ -37,16 +37,16 @@ const CartItem = ({ item }) => {
     
     return (
         <div className="flex-row">
-        <div>
-            <div>{item.name}, ${item.price}
-            <span
-                role="img"
-                aria-label="trash"
-                onClick={() => removeFromCart(item)}
-            >
-                🗑️
-            </span>
-            </div>
+        <div style={{display: "flex", alignItems: "flex-end"}}>
+          <div>{item.name} - - ${item.price}</div>
+          <span
+            role="img"
+            aria-label="trash"
+            onClick={() => removeFromCart(item)}
+            style={{marginLeft: "auto", cursor: "pointer"}}
+          >
+            🗑️
+          </span>
         </div>
         </div>
     );

@@ -1,4 +1,4 @@
-const cloudinary = require('cloudinary-core'); // If your code is for ES5
+//const cloudinary = require('cloudinary-core'); // If your code is for ES5
 //const cloudinary = require('cloudinary').v2;
 
 // const cloudinaryClient = new cloudinary.Cloudinary({
@@ -8,33 +8,31 @@ const cloudinary = require('cloudinary-core'); // If your code is for ES5
 
 // const cloudinaryClient = cloudinary.Cloudinary.new();
 // cloudinaryClient.config('dpi8jsakt');
+const cloudinary = require('cloudinary').v2;
 
-var cloudinaryClient = cloudinary.Cloudinary.new({ cloud_name: 'dpi8jsakt' });
+// configure the Cloudinary Node.js SDK with your Cloudinary account details
+cloudinary.config({
+	cloud_name: 'dpi8jsakt',
+	api_key: '979989155931243',
+	api_secret: '7C-yPQopdcfiimZfplpmNBhJf_Y',
+});
 
-// const cloudinaryClient = new cloudinary.Cloudinary({
-// 	cloud_name: 'dpi8jsakt',
-// 	api_key: '979989155931243',
-// 	api_secret: '7C-yPQopdcfiimZfplpmNBhJf_Y',
-// });
+// define the GraphQL query to collect public IDs from a specific folder
+const query = `
+query {
+  folder(path: "songs") {
+    public_ids
+  }
+}
+`;
 
-//console.log(cloudinaryClient);
+// execute the GraphQL query using the `graphql` method
+cloudinary.graphql(query).then((result) => {
+	// the `public_ids` field in the query result contains an array of the public IDs
+	// of the assets in the specified folder
+	const publicIds = result.folder.public_ids;
 
-const getIds = () => {
-	return new Promise((resolve, reject) => {
-		cloudinaryClient.api.resources({}, (error, result) => {
-			if (error) {
-				console.log('something went wrong');
-				reject(error);
-			} else {
-				const publicIDs = result.resources
-					.filter(
-						(resource) => resource.public_id && resource.folder === 'songs'
-					)
-					.map((resource) => resource.public_id);
-				console.log(result);
-				resolve(publicIDs);
-			}
-		});
-	});
-};
-module.exports = { getIds, cloudinary };
+	// do something with the public IDs
+	console.log(publicIds);
+});
+module.exports = cloudinary;

@@ -45,4 +45,4 @@ Technologies used:
 ## Credit
 
 
-Made with ❤ by [Jacob Canepa](https://github.com/jacobmcanepa), [Wilmer Martinez](), [Will Wartick](https://github.com/wwartick), and [Nikki Esguerra](https://github.com/desguerra)
+Made with ❤ by [Jacob Canepa](https://github.com/jacobmcanepa), [Wilmer Martinez](https://github.com/wilmr), [Will Wartick](https://github.com/wwartick), and [Nikki Esguerra](https://github.com/desguerra)

@@ -24,33 +24,22 @@ function Song(item) {
     idbPromise('cart', 'put', { ...item, purchaseQuantity: 1 });
   };
 
-  return (
-    <div className="basis-1/4 p-1 ">
-      <p className="text-white">{name}</p>
+	return (
+		<div className="basis-1/4 p-1 ">
+			<p className="text-white">{name}</p>
 
-      <div className="text-white">
-        <div>{category}</div>
-        <span>${price}</span>
-      </div>
-
-      {/* Check if the item is already in the cart */}
-      {cart.some((cartItem) => cartItem._id === _id) ? (
-        <div
-          className="tooltip"
-          data-tooltip="This item is already in your cart!"
-        >
-          Add to cart
-        </div>
-      ) : (
-        <button
-          onClick={addToCart}
-          className="px-4 py-1 m-1 transition ease-in-out delay-150 bg-emerald-200 hover:-translate-y-1 hover:scale-110 hover:bg-teal-300 duration-300 rounded-md drop-shadow-xl"
-        >
-          Add to cart
-        </button>
-      )}
-    </div>
-  );
+			<div className="text-black">
+				<div>{category}</div>
+				<span>${price}</span>
+			</div>
+			<button
+				onClick={addToCart}
+				className="px-4 py-1 m-1 transition ease-in-out delay-150 bg-emerald-200 hover:-translate-y-1 hover:scale-110 hover:bg-teal-300 duration-300 rounded-md drop-shadow-xl"
+			>
+				Add to cart
+			</button>
+		</div>
+	);
 }
 
 export default Song;

@@ -52,7 +52,7 @@ const resolvers = {
     },
 
     checkout: async (parent, args, context) => {
-      const url = 'https://g02-music-market.herokuapp.com';
+      //const url = new URL(context.headers.referer).origin;
       const order = new Order({ songs: args.songs });
         const { songs } = await order.populate('songs');
       const line_items = [];
@@ -81,8 +81,8 @@ const resolvers = {
         payment_method_types: ['card'],
         line_items,
         mode: 'payment',
-        success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${url}/`
+        success_url: `${process.env.HOST}/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${process.env.HOST}/`
       });
       
       return { session: session.id };

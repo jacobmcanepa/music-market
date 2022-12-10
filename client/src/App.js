@@ -17,7 +17,7 @@ import Success from './pages/Success';
 import OrderHistory from './pages/OrderHistory';
 
 const httpLink = createHttpLink({
-	uri: '/graphql',
+	uri: 'http://localhost:3001/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {

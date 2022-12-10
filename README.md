@@ -2,19 +2,20 @@
 
 ## Description
 
-***[Click HERE to visit the deployed application!](https://g02-music-market.herokuapp.com/)***
+**_[Click HERE to visit the deployed application!](https://g02-music-market.herokuapp.com/)_**
 
 **Music Market** is an online music store where artists can upload and sell their music where fans can discover and support them.
 
 Our motivation for development was to practice e-commerce development skills while combining it with something we all love: music.
 
 Technologies used:
-* MERN stack
-* Cloudinary for uploading audio files
-* GraphQL
-* Apollo Server
-* Stripe for payments
-* CSS: Tailwind and Bulma
+
+- MERN stack
+- Cloudinary React SDK for uploading audio files
+- GraphQL
+- Apollo Server
+- Stripe for payments
+- CSS: Tailwind and Bulma
 
 ### User Story
 
@@ -22,11 +23,10 @@ Technologies used:
 **I WANT** to upload my songs and browse other artists’ songs
 **SO THAT** I can share my music and support other artists
 
-
 ## Table of Contents
 
-* [Screenshots](#screenshots)
-* [Questions](#questions)
+- [Screenshots](#screenshots)
+- [Questions](#questions)
 
 ## Screenshots
 
@@ -43,6 +43,5 @@ Technologies used:
 ![screenshot 6 of project](assets/SS6.PNG)
 
 ## Credit
-
 
 Made with ❤ by [Jacob Canepa](https://github.com/jacobmcanepa), [Wilmer Martinez](https://github.com/wilmr), [Will Wartick](https://github.com/wwartick), and [Nikki Esguerra](https://github.com/desguerra)
